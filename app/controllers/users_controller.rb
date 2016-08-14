@@ -36,11 +36,13 @@ class UsersController < ApplicationController
   end
   
   def create
+    captcha_message = "The data you entered for the CAPTCHA wasn't correct.  Please try again"
     @user = User.new(params[:user])
-    if @user.save
+    if verify_recaptcha(model: @user, message: captcha_message) && @user.save
       sign_in @user
       redirect_to @user, :flash => { :success => "Welcome to the Sample App!" }
     else
+      flash.delete(:recaptcha_error)
       @title = "Sign up"
       render 'new'
     end

@@ -29,6 +29,8 @@ Spork.prefork do
     # instead of true.
     config.use_transactional_fixtures = true
 
+      Recaptcha.configuration.skip_verify_env.delete("test")
+
     def test_sign_in(user)
       controller.sign_in(user)
     end
