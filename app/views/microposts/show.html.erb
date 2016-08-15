@@ -1,0 +1,30 @@
+  <table>
+	  <% user = @micropost.user rescue User.find(micropost.user_id) %>
+	  <tr>
+		  <td class="gravatar">
+		    <%= link_to gravatar_for(user), user %>
+		  </td>
+		  <td class="micropost">
+		    <span class="user">
+		      <%= link_to user.name, user %>
+		    </span>
+		  </td>
+	  </tr>
+	  <table class="microposts" summary="User micropost">
+		  <%= render @micropost %>
+	  </table>
+	  <tr>
+	  	<td><h1>Comments:</h1></td>
+	  </tr>
+      <% if @micropost.comments.any? %>
+        <table class="microposts" summary="User comments">
+          <%= render @comments %>
+        </table>
+        <%= will_paginate @comments %>
+      <% end %>
+      <td class="main">
+        <h1 class="micropost">Leave your comment</h1>
+        <%= render 'shared/comment_form' %>
+      </td>
+
+  </table>

@@ -7,7 +7,8 @@ SampleApp::Application.routes.draw do
   end
   
   resources :sessions,      :only => [:new, :create, :destroy]
-  resources :microposts,    :only => [:create, :destroy]
+  resources :microposts,    :only => [:create, :destroy, :show]
+  resources :comments,    :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
   
   root :to => "pages#home"
